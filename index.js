@@ -3,7 +3,7 @@ import 'dotenv/config'
 import fetch from 'node-fetch';
 
 const app = express();
-const port = 8000;
+const port = 8000 || process.env.PORT;
 
 // Middleware
 app.use(express.json());
