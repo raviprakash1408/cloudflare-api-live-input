@@ -1,15 +1,20 @@
 import express from 'express';
 import 'dotenv/config'
 import fetch from 'node-fetch';
+import cors from 'cors'
 
 const app = express();
 const port = 8000 || process.env.PORT;
 
 // Middleware
+app.use(cors);
 app.use(express.json());
 
+let corOptions = {
+    origin: "*",
+}
 // Route to create a live input stream on Cloudflare
-app.post('/create-live-input', async (req, res) => {
+app.post('/create-live-input', cors(corOptions), async (req, res) => {
   const { accountId, ...body } = req.body;
   
   const cloudflareUrl = `https://api.cloudflare.com/client/v4/accounts/${accountId}/stream/live_inputs`;
