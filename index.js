@@ -7,7 +7,7 @@ const app = express();
 const port = 8000 || process.env.PORT;
 
 // Middleware
-app.use(cors);
+app.use(cors());
 app.use(express.json());
 
 let corOptions = {
@@ -35,9 +35,10 @@ app.post('/create-live-input', cors(corOptions), async (req, res) => {
     if (!response.ok) throw new Error(`Error from Cloudflare: ${response.statusText}`);
 
     const data = await response.json();
-    // console.log(data)
+    console.log(data)
     res.json(data);
   } catch (error) {
+    console.log(error)
     res.status(500).json({ message: error.message });
   }
 });
